@@ -1,4 +1,4 @@
-export const boardStateString:string = `r n b q k b n r
+export const boardStateString = `r n b q k b n r
 p p p p p p p p
 . . . . . . . .
 . . . . . . . .
