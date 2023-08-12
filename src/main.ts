@@ -6,10 +6,13 @@
 
 
 import { boardStateString } from "./boardState";
-import {  oneSquare, pieceObject, pieces } from "./interfaces";
+import { createBoardStateFromString } from "./createBoardStateFromString";
+import {parseStringToArray} from "./parseStringToArray"
+import { createBoardSquares } from "./createBoardSquares";
+import {  oneSquare, pieces } from "./interfaces";
 
-const pieces: pieces = {
-    'r': '♜',
+export const piecesObject: pieces = {
+    'r' : '♜',
     'n' : '♞',
     'b' : '♝',
     'k' : '♚',
@@ -24,10 +27,7 @@ const pieces: pieces = {
     'P' : '♙',
 
 }
-function parseStringToArray(boardStateString:string):string[]{
-   const boardStringAsArray:string[] = boardStateString.replace(/[' ']/g,'').split('').filter((char) => char !== '\n')
-    return boardStringAsArray;
-}
+
 
 const boardStringAsArray: string[] = parseStringToArray(boardStateString);
 const boardSquaresArray: oneSquare[] = createBoardSquares(boardStringAsArray)
@@ -35,17 +35,7 @@ const boardState: oneSquare[] = createBoardStateFromString(boardStringAsArray, b
 
 console.log(boardState)
 
-function createBoardStateFromString(
-    boardStringArray: string[],
-    boardSquaresArray:oneSquare[]
-):oneSquare[] {
-const boardState: oneSquare[] = [];
-for(let i=0;i<boardStringArray.length;i++){
-   boardSquaresArray[i].piece = pieces[boardStringArray[i] as keyof typeof pieces];
-   boardState.push(boardSquaresArray[i])
-}
-    return boardState;
-}
+
 
 
 
@@ -54,27 +44,7 @@ for(let i=0;i<boardStringArray.length;i++){
 // create function to create square objects
 // function to create piece objects with position etc
 
-function createBoardSquares(boardArray:string[]):oneSquare[]{
-const rows: number[] = [1,2,3,4,5,6,7,8];
-const columns: number[] = [1,2,3,4,5,6,7,8];
-const boardSquares:oneSquare[] = [];
-let lastId:number = 0;
-for(const row of rows){
-    for(const column of columns){
-        boardSquares.push({
-            id: column + lastId,         
-            row: row,
-            column: column,
-            piece: '',
-            colour: ''
-        }
 
-        )
-    }
-    lastId += 8;
-}
-    return boardSquares;
-}
 
 
 
